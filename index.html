@@ -21,61 +21,86 @@
             scroll-behavior: smooth;
         }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        
+        /* Layout Stability Guard - Prevent "kayma" */
         .chart-container { 
             position: relative; 
             width: 100%; 
             max-width: 600px; 
             margin-left: auto; 
             margin-right: auto; 
-            height: 300px; 
-            max-height: 400px; 
+            height: 280px; 
+            max-height: 350px; 
         }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+
         .gradient-bg { background: linear-gradient(135deg, var(--mui-purple), var(--mui-pink)); }
-        .package-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(124, 58, 237, 0.1); }
-        .package-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1); }
-        .active-pkg { border: 2px solid var(--mui-purple); background: white; box-shadow: 0 15px 30px rgba(124, 58, 237, 0.15); }
-        .laser-grid-header { background: #111827; color: white; }
-        .glass-morphism { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(124, 58, 237, 0.1); }
+        .package-card { 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            border: 1px solid rgba(124, 58, 237, 0.1); 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .package-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1); 
+        }
+        .active-pkg { 
+            border: 2px solid var(--mui-purple); 
+            background: white; 
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.15); 
+        }
+        .glass-morphism { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(124, 58, 237, 0.1); 
+        }
         .gradient-text {
             background: linear-gradient(135deg, var(--mui-purple), var(--mui-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        /* Prevention of horizontal overflow */
+        .no-slip { overflow-x: hidden; width: 100%; max-width: 100vw; }
     </style>
-    <!-- Chosen Palette: Mui Identity (Modern Purple, Vibrant Pink, Emerald Green) -->
-    <!-- Application Structure Plan: 
-        A highly interactive SPA designed to lead the client from the "Why" (Story) to the "How" (Strategy/SWOT) and finally the "What" (Packages). 
-        Key interactions include a radar-based SWOT chart, a detailed laser comparison module, and a package selector that highlights the "Growth" option.
+    <!-- Chosen Palette: Mui Identity (Purple, Pink, Emerald Green) -->
+    <!-- Application Structure Plan:
+        1. Sticky Header: Mui Medya | Full Creative Proposal branding.
+        2. Hero: Yuppie brand story focusing on the 2019 Ankara standard-setting journey.
+        3. Analysis: Interactive SWOT radar chart for market positioning.
+        4. Technical module: Interactive Laser Comparison (Classic vs New) using mobile-friendly grids.
+        5. Package Selector: 3 tiers (80k, 130k, 200k) with clearly separated mobile cards to prevent misalignment.
     -->
-    <!-- Visualization & Content Choices: 
-        - SWOT Analysis: Radar Chart to visualize competitive balance.
-        - Laser Comparison: Interactive HTML grid to showcase technical superiority (Classic vs New).
-        - Strategy Mix: Doughnut chart to explain content pillar distribution.
-        - Package Selection: Visual cards with distinct price points (80k, 130k, 200k).
+    <!-- Visualization & Content Choices:
+        - SWOT Radar: Displays technical, market, and branding score.
+        - Laser Grid: Comparative table layout for seans, results, and ara tarama.
+        - Counter Cards: Displaying processing times (e.g., 2-3 hours for full leg).
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="overflow-x-hidden">
+<body class="no-slip">
 
     <!-- Navbar -->
     <nav class="sticky top-0 z-50 glass-morphism">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <!-- CSS Based Logo Representation -->
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-lg">m</div>
-                    <div class="ml-2 w-3.5 h-3.5 rounded-full bg-emerald-500 shadow-sm border-2 border-white"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <div class="flex items-center shrink-0">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg">m</div>
+                    <div class="ml-1.5 sm:ml-2 w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 shadow-sm border-2 border-white"></div>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-baseline">
-                    <span class="text-xl font-bold tracking-tight text-gray-900">muimedya</span>
-                    <span class="hidden md:inline text-gray-300 mx-3 font-light">|</span>
-                    <span class="text-[10px] md:text-sm font-bold uppercase tracking-[0.2em] text-purple-600">Full Creative Proposal</span>
+                <div class="flex flex-col sm:flex-row sm:items-baseline overflow-hidden">
+                    <span class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 leading-none">muimedya</span>
+                    <span class="hidden sm:inline text-gray-300 mx-2 font-light">|</span>
+                    <span class="text-[8px] sm:text-[10px] md:text-sm font-bold uppercase tracking-[0.1em] text-purple-600 truncate">Full Creative Proposal</span>
                 </div>
             </div>
-            <div class="hidden lg:flex space-x-8 text-[11px] font-bold text-gray-500 uppercase tracking-widest">
-                <a href="#hikaye" class="hover:text-purple-600 transition-colors">Yuppie Hikayesi</a>
+            <div class="hidden lg:flex space-x-6 xl:space-x-8 text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+                <a href="#hikaye" class="hover:text-purple-600 transition-colors">Hikaye</a>
                 <a href="#strateji" class="hover:text-purple-600 transition-colors">Strateji</a>
-                <a href="#lazer" class="hover:text-purple-600 transition-colors">Lazer Teknolojisi</a>
+                <a href="#lazer" class="hover:text-purple-600 transition-colors">Lazer</a>
                 <a href="#teklif" class="hover:text-purple-600 transition-colors">Teklifler</a>
             </div>
         </div>
@@ -83,45 +108,46 @@
 
     <main>
         <!-- Section 1: Hero & Brand Story -->
-        <section id="hikaye" class="pt-24 pb-16 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div class="space-y-8">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-purple-50 text-purple-700 text-[10px] font-bold uppercase tracking-widest border border-purple-100">
-                        Ankara Güzellik Standartları 2016-2024
+        <section id="hikaye" class="pt-10 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-purple-50 text-purple-700 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest border border-purple-100">
+                        Ankara Güzellik Standartları 2019-2024
                     </div>
-                    <h1 class="text-5xl lg:text-7xl font-bold leading-[1.1] text-gray-900">
+                    <h1 class="text-3xl sm:text-5xl lg:text-7xl font-bold leading-tight text-gray-900">
                         Yuppie: <span class="gradient-text serif italic">Standartları</span> Belirleyen Vizyon.
                     </h1>
-                    <p class="text-gray-600 leading-relaxed text-lg">
-                        2016'da Ankara'ya geldiğinizde gördüğünüz o teknik ve sterilizasyon boşluğu, bugün Yuppie'nin varlık sebebi. <strong>"Young Urban Professional"</strong> ruhunu temsil eden markanız için Mui Medya, sadece içerik değil; bir "prestij otoritesi" kurguluyor.
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-lg">
+                        2019'da Ankara'ya geldiğinizde gördüğünüz o "sterilizasyon ve teknik" boşluğu, bugün Yuppie'nin temel taşı. <strong>"Young Urban Professional"</strong> ruhunu temsil eden markanız için Mui Medya, sadece bir salon değil; bir "prestij otoritesi" kurguluyor.
                     </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="p-6 bg-white rounded-[2rem] shadow-sm border border-purple-100 border-b-4 border-b-purple-500 text-center">
-                            <span class="block text-2xl font-bold text-purple-700">Yuppie</span>
-                            <span class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-1 block">Pozitif Enerji</span>
+                    <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-purple-100 border-b-4 border-b-purple-500 text-center">
+                            <span class="block text-lg sm:text-2xl font-bold text-purple-700">Yuppie</span>
+                            <span class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-1 block leading-tight">Pozitif Enerji</span>
                         </div>
-                        <div class="p-6 bg-white rounded-[2rem] shadow-sm border border-pink-100 border-b-4 border-b-pink-500 text-center">
-                            <span class="block text-2xl font-bold text-pink-600">Professional</span>
-                            <span class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-1 block">Kariyer Odaklılık</span>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-pink-100 border-b-4 border-b-pink-500 text-center">
+                            <span class="block text-lg sm:text-2xl font-bold text-pink-600">Professional</span>
+                            <span class="text-[9px] sm:text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-1 block leading-tight">Kariyer Odaklı</span>
                         </div>
                     </div>
                 </div>
-                <div class="relative">
+                <div class="relative mt-4 lg:mt-0">
                     <div class="absolute -inset-4 gradient-bg opacity-10 rounded-[3rem] blur-2xl"></div>
-                    <div class="relative bg-white p-10 rounded-[3rem] shadow-xl border border-purple-50">
-                        <h3 class="text-2xl font-bold mb-8 text-gray-800 border-b pb-4">Yuppie Manifesto</h3>
-                        <div class="space-y-6">
+                    <div class="relative bg-white p-6 sm:p-10 rounded-3xl shadow-xl border border-purple-50">
+                        <h3 class="text-xl font-bold mb-6 text-gray-800 border-b pb-4">Neden Yuppie?</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 italic mb-6">"Ankara'ya medikal manikürü, gerçek sterilizasyonu ve doğru tekniği 2019'da biz getirdik."</p>
+                        <div class="space-y-4">
                             <div class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold mr-4 shrink-0">1</div>
-                                <p class="text-sm text-gray-600"><strong class="text-gray-900 block mb-1">Dürüst Teknik</strong> Kanatmadan medikal manikür ve doğru mimari ile kalıcı oje uygulaması.</p>
+                                <div class="w-7 h-7 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold mr-3 shrink-0 text-xs">1</div>
+                                <p class="text-xs sm:text-sm text-gray-600"><strong class="text-gray-900">Dürüst Teknik:</strong> Kanatmadan medikal manikür ve doğru mimari.</p>
                             </div>
                             <div class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold mr-4 shrink-0">2</div>
-                                <p class="text-sm text-gray-600"><strong class="text-gray-900 block mb-1">Sterilizasyon Sözü</strong> Otoklav ve paketli ekipman ile Ankara'da tavizsiz hijyen kültürü.</p>
+                                <div class="w-7 h-7 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold mr-3 shrink-0 text-xs">2</div>
+                                <p class="text-xs sm:text-sm text-gray-600"><strong class="text-gray-900">Sterilizasyon Sözü:</strong> Otoklav ve tavizsiz hijyen kültürü.</p>
                             </div>
                             <div class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mr-4 shrink-0">3</div>
-                                <p class="text-sm text-gray-600"><strong class="text-gray-900 block mb-1">Adil Lazer</strong> Dakika bazlı ödeme ve sonuç odaklı yeni nesil teknoloji.</p>
+                                <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mr-3 shrink-0 text-xs">3</div>
+                                <p class="text-xs sm:text-sm text-gray-600"><strong class="text-gray-900">Adil Lazer:</strong> Dakika bazlı ödeme ve sonuç odaklı teknoloji.</p>
                             </div>
                         </div>
                     </div>
@@ -129,48 +155,32 @@
             </div>
         </section>
 
-        <!-- Section 2: SWOT Analysis -->
-        <section id="strateji" class="py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Stratejik Konumlandırma</h2>
-                    <p class="text-gray-500">Mui Medya analiziyle Yuppie'nin Ankara pazarındaki mevcut gücü ve potansiyeli.</p>
+        <!-- Section 2: Strategy -->
+        <section id="strateji" class="py-12 sm:py-24 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-2xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">Stratejik Analiz</h2>
+                    <p class="text-sm text-gray-500">Mui Medya analiziyle Yuppie'nin pazar gücü.</p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div class="chart-container">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container order-2 lg:order-1">
                         <canvas id="swotChart"></canvas>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="p-6 rounded-3xl bg-purple-50 border border-purple-100">
-                            <h4 class="font-bold text-purple-700 mb-3 flex items-center">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 order-1 lg:order-2">
+                        <div class="p-5 rounded-2xl bg-purple-50 border border-purple-100">
+                            <h4 class="font-bold text-purple-700 mb-2 flex items-center text-sm">
                                 <span class="mr-2">💪</span> Güçlü Yanlar
                             </h4>
-                            <p class="text-xs text-purple-900/70 leading-relaxed">
-                                Sektörel tecrübe (2016+), öncü sterilizasyon kültürü, sadık müşteri kitlesi ve usta yetiştirme gücü.
+                            <p class="text-[10px] sm:text-xs text-purple-900/70 leading-relaxed">
+                                Sektörel tecrübe (2019+), sterilizasyon kültürü ve sadık Yuppie kitlesi.
                             </p>
                         </div>
-                        <div class="p-6 rounded-3xl bg-emerald-50 border border-emerald-100">
-                            <h4 class="font-bold text-emerald-700 mb-3 flex items-center">
+                        <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-100">
+                            <h4 class="font-bold text-emerald-700 mb-2 flex items-center text-sm">
                                 <span class="mr-2">🚀</span> Fırsatlar
                             </h4>
-                            <p class="text-xs text-emerald-900/70 leading-relaxed">
-                                Yeni nesil lazer sistemiyle hızlı dökülme vaadi, erkek lazer pazarı ve akademileşme potansiyeli.
-                            </p>
-                        </div>
-                        <div class="p-6 rounded-3xl bg-pink-50 border border-pink-100">
-                            <h4 class="font-bold text-pink-700 mb-3 flex items-center">
-                                <span class="mr-2">🎯</span> Odak
-                            </h4>
-                            <p class="text-xs text-pink-900/70 leading-relaxed">
-                                Ankara'da "standart" arayan kariyer odaklı genç profesyonellere (Yuppie kitlesi) doğrudan erişim.
-                            </p>
-                        </div>
-                        <div class="p-6 rounded-3xl bg-stone-50 border border-stone-200">
-                            <h4 class="font-bold text-stone-700 mb-3 flex items-center">
-                                <span class="mr-2">🛡️</span> Koruma
-                            </h4>
-                            <p class="text-xs text-stone-900/70 leading-relaxed">
-                                Rakip engellerine rağmen büyüme hızı ve "Mahallenin Ustası" kimliğinden marka kimliğine geçiş.
+                            <p class="text-[10px] sm:text-xs text-emerald-900/70 leading-relaxed">
+                                Yeni nesil lazer sistemiyle hızlı dökülme ve erkek lazer pazarı.
                             </p>
                         </div>
                     </div>
@@ -178,195 +188,193 @@
             </div>
         </section>
 
-        <!-- Section 3: Laser Technology (Source Data Visualization) -->
-        <section id="lazer" class="py-24 bg-gray-900 text-white overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <!-- Section 3: Technical Module (Laser Data) -->
+        <section id="lazer" class="py-12 sm:py-24 bg-gray-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-16 gap-6">
                     <div class="max-w-xl">
-                        <h2 class="text-4xl font-bold mb-4">Yeni Nesil Lazer Teknolojisi</h2>
-                        <p class="text-gray-400">Klasik yöntemleri geride bırakan, veri temelli ve sonuç odaklı Yuppie yaklaşımı.</p>
+                        <h2 class="text-2xl sm:text-4xl font-bold mb-4">Yeni Nesil Lazer Verileri</h2>
+                        <p class="text-sm text-gray-400">Klasik yöntemleri geride bırakan, veri temelli Yuppie yaklaşımı.</p>
                     </div>
-                    <div class="bg-purple-600 px-6 py-3 rounded-2xl font-bold text-sm shadow-lg shadow-purple-500/20">
-                        Adil Ödeme Sistemi: Dakika Bazlı Ücretlendirme
+                    <div class="bg-purple-600 px-4 py-2 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest shadow-lg">
+                        Adil Ödeme: Dakika Bazlı
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Comparison Table -->
-                    <div class="lg:col-span-2 rounded-[2.5rem] overflow-hidden border border-gray-800 bg-gray-800/40 backdrop-blur-sm">
-                        <div class="grid grid-cols-3 p-8 border-b border-gray-800 font-bold text-xs uppercase tracking-widest text-gray-500">
-                            <div>Parametre</div>
-                            <div class="text-center">Klasik Yöntem</div>
-                            <div class="text-center text-pink-500">Yuppie Yeni Yöntem</div>
-                        </div>
-                        <div class="divide-y divide-gray-800">
-                            <div class="grid grid-cols-3 p-8 items-center group hover:bg-white/5 transition">
-                                <div class="text-sm font-semibold">Seans Sayısı</div>
-                                <div class="text-center text-gray-500 text-sm">Ortalama 10</div>
-                                <div class="text-center text-lg font-bold">Ortalama 5</div>
-                            </div>
-                            <div class="grid grid-cols-3 p-8 items-center group hover:bg-white/5 transition">
-                                <div class="text-sm font-semibold">Seans Sıklığı</div>
-                                <div class="text-center text-gray-500 text-sm">1.5 ayda bir (Yıl boyu)</div>
-                                <div class="text-center text-sm font-bold">1.5 yılda ortalama 5 kez</div>
-                            </div>
-                            <div class="grid grid-cols-3 p-8 items-center group hover:bg-white/5 transition">
-                                <div class="text-sm font-semibold">Sonuç Beklentisi</div>
-                                <div class="text-center text-gray-500 text-sm">Biriken etki (3-4 seans)</div>
-                                <div class="text-center text-lg font-bold text-emerald-400">~%70 İlk seans dökülme</div>
-                            </div>
-                            <div class="grid grid-cols-3 p-8 items-center group hover:bg-white/5 transition">
-                                <div class="text-sm font-semibold">Ara Tarama</div>
-                                <div class="text-center text-gray-500 text-sm">6-12 ayda bir gerekir</div>
-                                <div class="text-center text-sm font-bold">İhtiyaç kalmıyor</div>
-                            </div>
-                        </div>
+                    <div class="lg:col-span-2 rounded-2xl overflow-x-auto border border-gray-800 bg-gray-800/40 backdrop-blur-sm">
+                        <table class="w-full text-left border-collapse min-w-[500px]">
+                            <thead>
+                                <tr class="border-b border-gray-800 text-[9px] uppercase tracking-widest text-gray-500 font-bold">
+                                    <th class="p-6">Parametre</th>
+                                    <th class="p-6 text-center">Klasik Yöntem</th>
+                                    <th class="p-6 text-center text-pink-500">Yuppie Yeni Nesil</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-xs sm:text-sm">
+                                <tr class="border-b border-gray-800/50">
+                                    <td class="p-6 font-semibold">Seans Sayısı</td>
+                                    <td class="p-6 text-center text-gray-500">Ortalama 10</td>
+                                    <td class="p-6 text-center font-bold">Ortalama 5</td>
+                                </tr>
+                                <tr class="border-b border-gray-800/50">
+                                    <td class="p-6 font-semibold">Seans Sıklığı</td>
+                                    <td class="p-6 text-center text-gray-500">1.5 Ayda Bir</td>
+                                    <td class="p-6 text-center font-bold">1.5 Yılda Ort. 5 Kez</td>
+                                </tr>
+                                <tr class="border-b border-gray-800/50">
+                                    <td class="p-6 font-semibold">İlk Sonuç</td>
+                                    <td class="p-6 text-center text-gray-500">Biriken Etki</td>
+                                    <td class="p-6 text-center font-bold text-emerald-400">~%70 İlk Seansta</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-6 font-semibold">Ara Tarama</td>
+                                    <td class="p-6 text-center text-gray-500">6-12 Ayda Bir</td>
+                                    <td class="p-6 text-center font-bold">İhtiyaç Kalmıyor</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Time Stats -->
-                    <div class="bg-white/5 p-10 rounded-[2.5rem] border border-white/10">
-                        <h4 class="text-xl font-bold mb-8 flex items-center">
+                    <!-- Processing Times -->
+                    <div class="bg-white/5 p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                        <h4 class="text-lg font-bold mb-6 flex items-center">
                             <span class="mr-3 text-pink-500">⏳</span> İşlem Süreleri
                         </h4>
-                        <div class="space-y-6">
-                            <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                                <span class="text-sm text-gray-400">Tüm Bacak</span>
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Tüm Bacak</span>
                                 <span class="font-bold text-pink-500">2 - 3 Saat</span>
                             </div>
-                            <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                                <span class="text-sm text-gray-400">Yarım Bacak</span>
+                            <div class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Yarım Bacak</span>
                                 <span class="font-bold text-pink-500">1.5 - 2 Saat</span>
                             </div>
-                            <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                                <span class="text-sm text-gray-400">Tüm Kol</span>
+                            <div class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Tüm Kol</span>
                                 <span class="font-bold text-pink-500">1 Saat</span>
                             </div>
-                            <div class="flex justify-between items-center border-b border-white/5 pb-4">
-                                <span class="text-sm text-gray-400">Bikini</span>
+                            <div class="flex justify-between border-b border-white/5 pb-2">
+                                <span class="text-gray-400">Bikini</span>
                                 <span class="font-bold text-pink-500">45 - 60 Dakika</span>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-400">Koltuk Altı</span>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Koltuk Altı</span>
                                 <span class="font-bold text-pink-500">15 - 20 Dakika</span>
                             </div>
                         </div>
-                        <div class="mt-10 p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 text-[11px] text-emerald-400 leading-relaxed">
-                            <strong>Önemli:</strong> Kök olmadığında lazer etki etmez. İşlemden 1 ay önce ağda ve ip ile alım tamamen bırakılmalıdır.
-                        </div>
+                        <p class="mt-8 text-[9px] text-emerald-400 uppercase tracking-tighter leading-tight font-bold">
+                            ⚠️ Önemli: Kök olmadığında lazer etki etmez. İşlemden 1 ay önce ağda ve ip bırakılmalıdır.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Proposals/Packages -->
-        <section id="teklif" class="py-24 bg-stone-50">
-            <div class="max-w-7xl mx-auto px-6 text-center">
-                <div class="max-w-2xl mx-auto mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Stratejik Yatırım Planları</h2>
-                    <p class="text-gray-500">Yuppie'nin Ankara'daki "Standart Belirleyici" kimliğini güçlendirmek üzere optimize edilmiş 3 farklı vizyon.</p>
+        <!-- Section 4: Proposals (The 3 Packages) -->
+        <section id="teklif" class="py-12 sm:py-24 bg-stone-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">Yıllık Yatırım Planları</h2>
+                    <p class="text-sm text-gray-500">Mui Medya titizliğiyle kurgulanmış 3 farklı vizyon.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
                     <!-- Package 1 -->
-                    <div id="pkg-1" onclick="selectPackage(1)" class="package-card p-10 rounded-[3rem] bg-white cursor-pointer group">
+                    <div id="pkg-1" onclick="selectPackage(1)" class="package-card p-8 rounded-3xl bg-white cursor-pointer group">
                         <div class="mb-10">
-                            <span class="text-[10px] font-bold text-purple-600 uppercase tracking-widest block mb-2">Digital First</span>
-                            <h3 class="text-2xl font-bold text-gray-900">Motion Graphics</h3>
+                            <span class="text-[9px] font-bold text-purple-600 uppercase tracking-widest block mb-2">Digital First</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Motion Graphics</h3>
                         </div>
                         <div class="mb-10">
-                            <span class="text-5xl font-bold text-gray-900">80.000₺</span>
-                            <span class="text-sm text-gray-500 font-semibold">+ KDV / Ay</span>
+                            <span class="text-4xl font-bold text-gray-900">80.000₺</span>
+                            <span class="text-xs text-gray-500 font-semibold">+ KDV / Ay</span>
                         </div>
-                        <ul class="space-y-5 mb-12 text-sm text-gray-600">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full mr-3"></span> Tamamı Grafik/Motion İçerik</li>
+                        <ul class="space-y-4 mb-10 text-xs sm:text-sm text-gray-600">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full mr-3"></span> Tamamı Grafik İçerik</li>
                             <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full mr-3"></span> 4-6 Adet Dinamik Reels</li>
                             <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full mr-3"></span> 10-15 Adet Grafik Story</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-600 rounded-full mr-3"></span> Haftalık Strateji Desteği</li>
                         </ul>
-                        <button class="w-full py-4 rounded-2xl border-2 border-purple-50 group-hover:bg-purple-600 group-hover:text-white transition-all font-bold text-sm">Seç ve Başlat</button>
+                        <button class="w-full py-4 rounded-2xl border-2 border-purple-50 group-hover:bg-purple-600 group-hover:text-white transition-all font-bold text-xs uppercase">Seç</button>
                     </div>
 
                     <!-- Package 2 -->
-                    <div id="pkg-2" onclick="selectPackage(2)" class="package-card active-pkg p-10 rounded-[3rem] cursor-pointer relative">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-mui-gradient text-white text-[10px] font-bold px-6 py-2 rounded-full uppercase tracking-widest shadow-lg shadow-purple-500/30">En Çok Tercih Edilen</div>
+                    <div id="pkg-2" onclick="selectPackage(2)" class="package-card active-pkg p-8 rounded-3xl cursor-pointer relative">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-mui-gradient text-white text-[8px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg shadow-purple-500/30">En Çok Tercih Edilen</div>
                         <div class="mb-10">
-                            <span class="text-[10px] font-bold text-pink-600 uppercase tracking-widest block mb-2">Production Focus</span>
-                            <h3 class="text-2xl font-bold text-gray-900">Yuppie Standard</h3>
+                            <span class="text-[9px] font-bold text-pink-600 uppercase tracking-widest block mb-2">Growth Focus</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Yuppie Standard</h3>
                         </div>
                         <div class="mb-10">
-                            <span class="text-5xl font-bold text-gray-900">130.000₺</span>
-                            <span class="text-sm text-gray-500 font-semibold">+ KDV / Ay</span>
+                            <span class="text-4xl font-bold text-gray-900">130.000₺</span>
+                            <span class="text-xs text-gray-500 font-semibold">+ KDV / Ay</span>
                         </div>
-                        <ul class="space-y-5 mb-12 text-sm text-gray-600">
-                            <li class="flex items-center font-bold text-gray-900"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> 1 Tam Gün Yerinde Çekim</li>
+                        <ul class="space-y-4 mb-10 text-xs sm:text-sm text-gray-600">
+                            <li class="flex items-center font-bold text-gray-900"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> 1 Gün Yerinde Çekim</li>
                             <li class="flex items-center font-bold text-gray-900"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> 8 Adet Profesyonel Reels</li>
                             <li class="flex items-center font-bold text-gray-900"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> 20 Adet Profesyonel Fotoğraf</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> Senaryo & Creative Meeting</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full mr-3"></span> 2 Tur Revizyon Hakkı</li>
                         </ul>
-                        <button class="w-full py-4 rounded-2xl gradient-bg text-white shadow-lg shadow-purple-500/20 font-bold text-sm hover:opacity-90 transition">Büyümeyi Başlat</button>
+                        <button class="w-full py-4 rounded-2xl gradient-bg text-white shadow-lg shadow-purple-500/20 font-bold text-xs uppercase">Seç</button>
                     </div>
 
                     <!-- Package 3 -->
-                    <div id="pkg-3" onclick="selectPackage(3)" class="package-card p-10 rounded-[3rem] bg-white cursor-pointer group">
+                    <div id="pkg-3" onclick="selectPackage(3)" class="package-card p-8 rounded-3xl bg-white cursor-pointer group">
                         <div class="mb-10">
-                            <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Maximum Prestige</span>
-                            <h3 class="text-2xl font-bold text-gray-900">Yuppie Elite</h3>
+                            <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest block mb-2">Maximum Prestige</span>
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Yuppie Elite</h3>
                         </div>
                         <div class="mb-10">
-                            <span class="text-5xl font-bold text-gray-900">200.000₺</span>
-                            <span class="text-sm text-gray-500 font-semibold">+ KDV / Ay</span>
+                            <span class="text-4xl font-bold text-gray-900">200.000₺</span>
+                            <span class="text-xs text-gray-500 font-semibold">+ KDV / Ay</span>
                         </div>
-                        <ul class="space-y-5 mb-12 text-sm text-gray-600">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> 2 Tam Gün Yerinde Çekim</li>
+                        <ul class="space-y-4 mb-10 text-xs sm:text-sm text-gray-600">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> 2 Gün Yerinde Çekim</li>
                             <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> 12 Adet Sinematik Reels</li>
                             <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> 40 Adet Premium Fotoğraf</li>
-                            <li class="flex items-center font-bold text-emerald-700"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> Reklam Kreatif Yönetimi</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></span> Aylık Performans Raporu</li>
                         </ul>
-                        <button class="w-full py-4 rounded-2xl border-2 border-emerald-50 group-hover:bg-emerald-600 group-hover:text-white transition-all font-bold text-sm">Zirveyi Hedefle</button>
+                        <button class="w-full py-4 rounded-2xl border-2 border-emerald-50 group-hover:bg-emerald-600 group-hover:text-white transition-all font-bold text-xs uppercase">Seç</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section 5: Strategy & Tone -->
-        <section class="py-24 bg-white border-t border-gray-100">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-gray-900 mb-8">İletişim Dili ve Vizyon Stratejisi</h2>
-                <div class="p-12 rounded-[3rem] bg-stone-50 border border-stone-200 shadow-inner relative overflow-hidden">
+        <section class="py-12 sm:py-24 bg-white border-t border-gray-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">İletişim Dili ve Vizyon</h2>
+                <div class="p-8 sm:p-12 rounded-[2.5rem] bg-stone-50 border border-stone-200 shadow-inner relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-32 h-32 gradient-bg opacity-5 blur-3xl"></div>
-                    <p class="text-gray-700 italic leading-relaxed text-lg mb-8">
-                        "Yuppie, Ankara'da sadece bir salon değil; 2016'dan beri süregelen bir <strong>mükemmeliyet standardıdır.</strong> Biz sadece manikür yapmıyoruz; sterilizasyon ve doğru tekniği bir yaşam tarzı olarak sunuyoruz. Lazerde ise en adil, en şeffaf ve en bilimsel sonucu vadediyoruz."
+                    <p class="text-gray-700 italic leading-relaxed text-sm sm:text-lg mb-8">
+                        "Yuppie, Ankara'da sadece bir salon değil; 2019'dan beri süregelen bir <strong>mükemmeliyet standardıdır.</strong> Biz sadece manikür yapmıyoruz; sterilizasyon ve doğru tekniği bir yaşam tarzı olarak sunuyoruz. Lazerde ise en adil, en şeffaf ve en bilimsel sonucu vadediyoruz."
                     </p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <span class="px-5 py-2 bg-white rounded-full text-[10px] font-bold text-purple-600 border border-purple-100 shadow-sm uppercase tracking-widest">Profesyonel</span>
-                        <span class="px-5 py-2 bg-white rounded-full text-[10px] font-bold text-pink-600 border border-pink-100 shadow-sm uppercase tracking-widest">Net</span>
-                        <span class="px-5 py-2 bg-white rounded-full text-[10px] font-bold text-emerald-600 border border-emerald-100 shadow-sm uppercase tracking-widest">Pozitif</span>
-                        <span class="px-5 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 shadow-sm uppercase tracking-widest">Şeffaf</span>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="px-4 py-2 bg-white rounded-full text-[9px] font-bold text-purple-600 border border-purple-100 shadow-sm uppercase tracking-widest">Profesyonel</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-[9px] font-bold text-pink-600 border border-pink-100 shadow-sm uppercase tracking-widest">Pozitif</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-[9px] font-bold text-emerald-600 border border-emerald-100 shadow-sm uppercase tracking-widest">Net</span>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-gray-100 bg-white">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center space-x-2">
+    <footer class="py-10 border-t border-gray-100 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-2 shrink-0">
                 <div class="w-8 h-8 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-sm">m</div>
-                <p class="text-sm font-bold tracking-tight text-gray-900">mui medya <span class="text-gray-400 font-normal">| Full Creative Proposal</span></p>
+                <p class="text-xs font-bold text-gray-900">muimedya <span class="text-gray-400 font-normal">| Full Creative Proposal</span></p>
             </div>
-            <div class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em]">
+            <p class="text-[8px] sm:text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em] text-center">
                 Ankara | 2024 Strategic Proposal for Yuppie
-            </div>
+            </p>
         </div>
     </footer>
 
     <script>
-        // --- State ---
+        // --- State Management ---
         let currentPackage = 2;
 
-        // --- Charts ---
+        // --- Charts Implementation ---
         document.addEventListener('DOMContentLoaded', () => {
             initSwotChart();
         });
@@ -384,7 +392,7 @@
                         borderColor: '#7C3AED',
                         pointBackgroundColor: '#7C3AED',
                         borderWidth: 2,
-                        pointRadius: 4
+                        pointRadius: 3
                     }, {
                         label: 'Sektör Ortalaması',
                         data: [40, 60, 50, 65, 30],
@@ -403,7 +411,7 @@
                             angleLines: { color: 'rgba(124, 58, 237, 0.1)' },
                             grid: { color: 'rgba(124, 58, 237, 0.1)' },
                             pointLabels: { 
-                                font: { family: 'Plus Jakarta Sans', size: 10, weight: '700' },
+                                font: { family: 'Plus Jakarta Sans', size: 9, weight: '700' },
                                 color: '#6B7280'
                             },
                             ticks: { display: false }
@@ -412,14 +420,18 @@
                     plugins: {
                         legend: { 
                             position: 'bottom',
-                            labels: { font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' }, padding: 20 }
+                            labels: { 
+                                font: { family: 'Plus Jakarta Sans', size: 10, weight: '600' }, 
+                                padding: 15,
+                                usePointStyle: true
+                            }
                         }
                     }
                 }
             });
         }
 
-        // --- Interactions ---
+        // --- Interactive Package Selection ---
         function selectPackage(id) {
             for (let i = 1; i <= 3; i++) {
                 const pkg = document.getElementById(`pkg-${i}`);
