@@ -28,21 +28,20 @@
         .active-pkg { border: 2px solid var(--mui-purple); background: white; }
         .laser-grid-header { background: #111827; color: white; }
         .glass-morphism { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(109, 40, 217, 0.1); }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--mui-purple), var(--mui-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
     <!-- Chosen Palette: Mui Identity (Purple, Pink, Emerald Green) -->
     <!-- Application Structure Plan:
         1. Brand Story Integration: Linking the 2016 Ankara origin story to the "Yuppie" lifestyle concept.
         2. SWOT Analysis: Data-driven visualization of market positioning.
         3. Laser Tech Deep-Dive: Interactive recreation of the provided image data (Classic vs New, Times, Payments).
-        4. Strategic Packages: 3 Tiers (80k, 130k, 200k) with the requested content counts.
+        4. Strategic Packages: 3 Tiers (80k, 130k, 200k) with optimized content counts.
         5. Communication Strategy: Tone of voice and "Standard Setting" narrative.
     -->
-    <!-- Visualization & Content Choices:
-        - SWOT Analysis (Radar Chart): To show Mui Medya's perspective on Yuppie's strengths.
-        - Laser Comparison Table (Interactive): Replaces static images with clean, readable data.
-        - Package Selector: Simple interactive cards for the 3 tiers.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="overflow-x-hidden">
 
@@ -55,10 +54,10 @@
                 <span class="text-xl font-bold tracking-tighter text-gray-900">mui <span class="text-purple-600">medya</span></span>
             </div>
             <div class="hidden lg:flex space-x-8 text-sm font-bold text-gray-500 uppercase tracking-widest">
-                <a href="#hikaye" class="hover:text-purple-600 transition">Hikayemiz</a>
+                <a href="#hikaye" class="hover:text-purple-600 transition">Yuppie Hikayesi</a>
                 <a href="#strateji" class="hover:text-purple-600 transition">Strateji</a>
                 <a href="#lazer" class="hover:text-purple-600 transition">Teknik</a>
-                <a href="#teklif" class="hover:text-purple-600 transition">Teklif</a>
+                <a href="#teklif" class="hover:text-purple-600 transition">Teklifler</a>
             </div>
         </div>
     </nav>
@@ -68,13 +67,13 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
                 <span class="text-purple-600 font-bold tracking-[0.2em] uppercase text-xs">Ankara 2016'dan Bugüne</span>
-                <h1 class="mt-4 text-5xl lg:text-7xl font-bold leading-tight text-gray-900">Bir <span class="gradient-text serif italic">Standart</span> Hikayesi.</h1>
+                <h1 class="mt-4 text-5xl lg:text-7xl font-bold leading-tight text-gray-900"><span class="gradient-text">Yuppie:</span> Bir Standart Hikayesi.</h1>
                 <p class="mt-8 text-gray-600 leading-relaxed">
-                    2016'da Ankara'ya geldiğinizde gördüğünüz o "sterilizasyon ve teknik" boşluğu, bugün Yuppie'nin temel taşı. Sadece bir salon değil; <strong>"Young Urban Professional"</strong> ruhunu taşıyan, kariyer odaklı, vizyoner ve enerjik bir duruş. Mui Medya olarak bu duruşu dijitalin yeni standardı haline getiriyoruz.
+                    2016'da Ankara'ya geldiğinizde gördüğünüz o "sterilizasyon ve teknik" boşluğu, bugün <strong>Yuppie</strong>'nin temel taşı. Sadece bir salon değil; <strong>"Young Urban Professional"</strong> ruhunu taşıyan, kariyer odaklı, vizyoner ve enerjik bir duruş. Mui Medya olarak bu duruşu dijitalin yeni standardı haline getiriyoruz.
                 </p>
                 <div class="mt-10 flex space-x-4">
                     <div class="p-4 bg-white rounded-2xl shadow-sm border border-purple-100 flex-1">
-                        <span class="block text-2xl font-bold text-purple-600">Yuppi!</span>
+                        <span class="block text-2xl font-bold text-purple-600">Yuppie</span>
                         <span class="text-xs text-gray-400 uppercase font-bold tracking-tighter">Pozitif Enerji</span>
                     </div>
                     <div class="p-4 bg-white rounded-2xl shadow-sm border border-purple-100 flex-1">
@@ -102,7 +101,7 @@
                         </li>
                         <li class="flex items-start">
                             <span class="text-green-500 mr-3">✦</span>
-                            <span><strong>Yuppie Enerjisi:</strong> Neşeli, stil sahibi ve güçlü.</span>
+                            <span><strong>Yuppie Ruhu:</strong> Neşeli, stil sahibi ve her zaman güçlü.</span>
                         </li>
                     </ul>
                 </div>
@@ -128,7 +127,7 @@
                     </div>
                     <div class="p-6 rounded-2xl bg-pink-50 border border-pink-100">
                         <h4 class="font-bold text-pink-700 mb-2">Fırsatlar</h4>
-                        <p class="text-xs text-pink-900 leading-relaxed">Erkek lazer pazarı, "standart" arayan kitleye odaklanma, eğitim/akademi potansiyeli.</p>
+                        <p class="text-xs text-pink-900 leading-relaxed">Erkek lazer pazarı, "standart" arayan kitleye odaklanma, Yuppie akademi potansiyeli.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100">
                         <h4 class="font-bold text-gray-700 mb-2">Zayıf Yanlar</h4>
@@ -148,15 +147,15 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-16">
                 <h2 class="text-3xl font-bold">Yeni Nesil Lazer Sistemi</h2>
-                <p class="text-gray-400 mt-2">Teknik verilerle şeffaf ve sonuç odaklı yaklaşım.</p>
+                <p class="text-gray-400 mt-2">Yuppie teknik verileriyle şeffaf ve sonuç odaklı yaklaşım.</p>
             </div>
 
             <!-- Comparison Table -->
-            <div class="overflow-hidden rounded-3xl border border-gray-800 bg-gray-800/50 mb-12">
+            <div class="overflow-hidden rounded-3xl border border-gray-800 bg-gray-800/50 mb-12 shadow-2xl">
                 <div class="grid grid-cols-3 p-6 laser-grid-header font-bold text-sm uppercase tracking-widest">
                     <div>Özellik</div>
                     <div class="text-center">Klasik Yöntem</div>
-                    <div class="text-center text-pink-500">Yeni Yöntem (Yuppie)</div>
+                    <div class="text-center text-pink-500">Yuppie Yeni Yöntem</div>
                 </div>
                 <div class="divide-y divide-gray-700 text-sm">
                     <div class="grid grid-cols-3 p-6 items-center">
@@ -186,7 +185,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                 <div class="bg-pink-900/20 p-8 rounded-3xl border border-pink-500/20">
                     <h4 class="text-xl font-bold mb-6 flex items-center">
-                        <span class="mr-3">⏱️</span> İşlem Süreleri (Yeni Yöntem)
+                        <span class="mr-3">⏱️</span> İşlem Süreleri (Yuppie Standart)
                     </h4>
                     <div class="space-y-4 text-sm">
                         <div class="flex justify-between border-b border-white/10 pb-2"><span>Tüm Bacak</span><span class="font-bold text-pink-400">2 - 3 Saat</span></div>
@@ -198,12 +197,12 @@
                 </div>
                 <div class="space-y-6">
                     <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
-                        <h5 class="font-bold text-green-400 mb-2">Adil Ödeme Sistemi</h5>
+                        <h5 class="font-bold text-green-400 mb-2">Yuppie Adil Ödeme Sistemi</h5>
                         <p class="text-xs text-gray-400 leading-relaxed">Ödemeler seans başına yapılır. 3-4. seanstan sonra tüy miktarı azaldığında <strong>dakika bazlı ücrete</strong> geçilir. Sadece işlem süresi kadar ödersiniz.</p>
                     </div>
                     <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
                         <h5 class="font-bold text-amber-400 mb-2">Gizlilik & Takip Protokolü</h5>
-                        <p class="text-xs text-gray-400 leading-relaxed">Tüy döngüsü takibi için işlem yapılacak bölgenin fotoğrafını istiyoruz. Bu veriler kesinlikle izinsiz paylaşılmaz, gizlilik bizim için esastır.</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">Tüy döngüsü takibi için işlem yapılacak bölgenin fotoğrafını istiyoruz. Bu veriler kesinlikle izinsiz paylaşılmaz, Yuppie için gizlilik esastır.</p>
                     </div>
                 </div>
             </div>
@@ -214,12 +213,12 @@
     <section id="teklif" class="py-24 bg-mui-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold">Stratejik Paketler</h2>
-                <p class="text-gray-500 mt-2">Mui Medya titizliğiyle kurgulanmış 3 farklı vizyon.</p>
+                <h2 class="text-4xl font-bold text-gray-900">Stratejik Paketler</h2>
+                <p class="text-gray-500 mt-2">Mui Medya titizliğiyle Yuppie için kurgulanmış 3 farklı vizyon.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Package 1: Motion Graphics -->
+                <!-- Package 1 -->
                 <div id="pkg-1" onclick="selectPackage(1)" class="package-card p-8 rounded-[2rem] border border-purple-100 bg-white cursor-pointer transition-all">
                     <div class="mb-8">
                         <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Digital First</span>
@@ -238,7 +237,7 @@
                     <button class="w-full py-4 rounded-2xl border border-purple-200 font-bold text-sm hover:bg-purple-50 transition">Seç ve Başlat</button>
                 </div>
 
-                <!-- Package 2: Standard Production -->
+                <!-- Package 2 -->
                 <div id="pkg-2" onclick="selectPackage(2)" class="package-card p-8 rounded-[2rem] active-pkg shadow-xl cursor-pointer transition-all relative">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-mui-gradient text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg gradient-bg">Popüler Seçim</div>
                     <div class="mb-8">
@@ -259,7 +258,7 @@
                     <button class="w-full py-4 rounded-2xl bg-mui-gradient text-white font-bold text-sm shadow-md hover:opacity-90 transition gradient-bg">Şimdi Başlat</button>
                 </div>
 
-                <!-- Package 3: Strategic Elite -->
+                <!-- Package 3 -->
                 <div id="pkg-3" onclick="selectPackage(3)" class="package-card p-8 rounded-[2rem] border border-emerald-100 bg-white cursor-pointer transition-all">
                     <div class="mb-8">
                         <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Strategic Elite</span>
@@ -283,12 +282,12 @@
     </section>
 
     <!-- Communication & Tone -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white border-t border-gray-100">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-8">İletişim Dili ve Strateji</h2>
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">İletişim Dili ve Strateji</h2>
             <div class="p-10 rounded-[3rem] bg-gray-50 border border-gray-100 space-y-6">
                 <p class="text-gray-700 italic leading-relaxed">
-                    "Yuppie, Ankara'da bir standarttır. Biz sadece manikür yapmıyoruz; sterilizasyon ve doğru tekniği bir yaşam tarzı olarak sunuyoruz. Lazerde ise en adil, en şeffaf ve en hızlı sonucu vadediyoruz."
+                    "<strong>Yuppie</strong>, Ankara'da bir standarttır. Biz sadece manikür yapmıyoruz; sterilizasyon ve doğru tekniği bir yaşam tarzı olarak sunuyoruz. Lazerde ise en adil, en şeffaf ve en hızlı sonucu vadediyoruz."
                 </p>
                 <div class="flex flex-wrap justify-center gap-4 pt-4">
                     <span class="px-4 py-2 bg-white rounded-full text-xs font-bold text-purple-600 border border-purple-100 shadow-sm">PROFESYONEL</span>
@@ -306,7 +305,7 @@
                 <div class="w-6 h-6 rounded-full bg-mui-gradient flex items-center justify-center text-white font-bold text-xs gradient-bg">m</div>
                 <span class="text-sm font-bold tracking-tighter text-gray-900 uppercase">mui medya</span>
             </div>
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">Ankara | 2024 Strategic Proposal</p>
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">Ankara | 2024 Strategic Proposal for Yuppie</p>
         </div>
     </footer>
 
@@ -349,14 +348,12 @@
             });
         }
 
-        // --- Interaction ---
         function selectPackage(id) {
             for (let i = 1; i <= 3; i++) {
                 const pkg = document.getElementById(`pkg-${i}`);
                 if (i === id) {
                     pkg.classList.add('active-pkg', 'shadow-xl');
                     pkg.classList.remove('bg-white');
-                    // Add standard active look
                 } else {
                     pkg.classList.remove('active-pkg', 'shadow-xl');
                     pkg.classList.add('bg-white');
